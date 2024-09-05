@@ -1,6 +1,8 @@
 import { Controller, Get, NotFoundException } from "@nestjs/common";
 import { UsersService } from "./users.service";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('user')
 @Controller('user')
 export class UsersController {
     constructor(private usersService: UsersService) {}

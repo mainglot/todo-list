@@ -6,19 +6,6 @@ import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
-    private readonly users = [
-        {
-          userId: 1,
-          username: 'john',
-          password: 'changeme',
-        },
-        {
-          userId: 2,
-          username: 'maria',
-          password: 'guess',
-        },
-    ];
-
     constructor(
       @InjectModel(User.name) private userModel: Model<User>
     ) {}
@@ -32,9 +19,25 @@ export class UsersService {
       return this.userModel.find().exec();
     }
     
-    async findOne(username: string): Promise<User | undefined> {
+    async findOne(name: string): Promise<User | undefined> {
         return this.userModel.findOne({
-          name: username
+          name: name
         }).exec();
+    }
+
+    async removeSession(user: User) {
+      this.userModel.updateOne({
+        name: user.name
+      }, {
+        token: null,
+      });
+    }
+
+    async addSession(user: User, token: string) {
+      this.userModel.updateOne({
+        name: user.name
+      }, {
+        token
+      });
     }
 }
