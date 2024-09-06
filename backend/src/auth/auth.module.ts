@@ -13,7 +13,7 @@ import { RefreshTokenStrategy } from './strategies/refreshToken.strategy';
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60m' },
+      signOptions: { expiresIn: '60s' },
     }),
   ],
   controllers: [AuthController],

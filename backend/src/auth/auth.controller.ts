@@ -9,7 +9,7 @@ import {
     UseGuards
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard, RefreshGuard } from './auth.guard';
 import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
 import { signInDto } from './dto/sign-in.dto';
 
@@ -37,5 +37,15 @@ export class AuthController {
     @Get('profile')
     getProfile(@Request() req) {
         return req.user;
+    }
+
+    @ApiBearerAuth()
+    @UseGuards(RefreshGuard)
+    @HttpCode(HttpStatus.OK)
+    @Get('refresh')
+    refresh(@Request() req) {
+        const username = req.user.name;
+        const refresh_token = req.refresh_token;
+        return this.authService.refreshToken(username, refresh_token);
     }
 }

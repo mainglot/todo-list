@@ -26,7 +26,7 @@ export class UsersService {
     }
 
     async removeSession(user: User) {
-      this.userModel.updateOne({
+      await this.userModel.updateOne({
         name: user.name
       }, {
         token: null,
@@ -34,7 +34,7 @@ export class UsersService {
     }
 
     async addSession(user: User, token: string) {
-      this.userModel.updateOne({
+      await this.userModel.updateOne({
         name: user.name
       }, {
         token

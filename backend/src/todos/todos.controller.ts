@@ -1,11 +1,9 @@
-import { Body, Controller, Delete, Get, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Request } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { Todos } from './schemas/todos.schema';
-import { todo } from 'node:test';
-import { FilterDto } from './dto/filter.dto';
 import { CreateDto } from './dto/create.dto';
 import { TodoItemIdDto } from './dto/todo-item-id.dto';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiParam } from '@nestjs/swagger';
 
 @ApiBearerAuth()
 @Controller('tasks')
@@ -14,23 +12,25 @@ export class TodosController {
         private todosService: TodosService
     ) {}
 
-    @Get('')
-    async getList(@Body() filter: FilterDto): Promise<Todos[]> {
-        return this.todosService.getList(filter);
+    @Get()
+    async getList(): Promise<any> {
+        return this.todosService.getList();
     }
 
-    @Post('')
+    @Post()
     async create(@Body() createDto: CreateDto): Promise<Todos> {
         return this.todosService.create(createDto);
     }
 
+    @ApiParam({ name: 'id', required: true })
     @Patch(':id')
-    async setDone(@Body() todoItemId: TodoItemIdDto): Promise<Todos> {
-        return this.todosService.setDone(todoItemId);
+    async setDone(@Param() req: TodoItemIdDto): Promise<Todos> {
+        return this.todosService.setDone(req);
     }
 
+    @ApiParam({ name: 'id', required: true })
     @Delete(':id')
-    async delete(@Body() todoItemId: TodoItemIdDto): Promise<boolean> {
+    async delete(@Request() todoItemId: TodoItemIdDto): Promise<boolean> {
         return this.todosService.delete(todoItemId);
     }
 }
