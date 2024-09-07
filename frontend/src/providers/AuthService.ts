@@ -1,7 +1,7 @@
 import { tFetch } from "@/utils/tfetch";
 
-const link = 'http://localhost:3000/auth/login';
-const linkRefresh = 'http://localhost:3000/auth/refresh';
+const link = `${import.meta.env.BACKEND_URL || ''}/auth/login`;
+const linkRefresh = `${import.meta.env.BACKEND_URL || ''}/auth/refresh`;
 
 class AuthService {
     private subscribers: ((isAuthed: boolean) => void)[] = [];

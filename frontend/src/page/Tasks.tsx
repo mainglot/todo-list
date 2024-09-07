@@ -61,7 +61,7 @@ export function Tasks() {
 
     return (
         <>
-        <div>
+        <div className="m-2">
             <TaskFilter updateFilterValue={setFilterValue} />
         </div>
         <Table>

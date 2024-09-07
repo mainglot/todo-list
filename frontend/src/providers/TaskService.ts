@@ -1,7 +1,7 @@
 import { Task } from "@/types/Task";
 import { tFetch } from "@/utils/tfetch";
 
-const link = 'http://localhost:3000/tasks';
+const link = `${import.meta.env.BACKEND_URL || ''}/tasks`;
 
 export const fetchTasks = async (): Promise<Task[]> => {
     return tFetch(link, {
@@ -11,6 +11,8 @@ export const fetchTasks = async (): Promise<Task[]> => {
         })
         .then((response) => response.json());
 };
+
+
 
 export const createTask = async (description: string): Promise<Task> => {
     return tFetch(link, {

@@ -17,18 +17,20 @@ export function Login() {
         <div className="flex justify-center">
             <form onSubmit={handleSubmit} className="w-[400px]">
                 <Input
+                    className="m-2"
                     type="text"
                     placeholder="Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
                 <Input
+                    className="m-2"
                     type="password"
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <Button type="submit">Login</Button>
+                <Button className="m-2" type="submit">Login</Button>
             </form>
         </div>
     </>
