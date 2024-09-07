@@ -11,8 +11,9 @@ export class TodosService {
         @InjectModel(Todos.name) private todoModel: Model<Todos>
     ) {}
 
-    async getList(): Promise<Todos[]> {
+    async getList(userId: string): Promise<Todos[]> {
         return this.todoModel.find({
+            userId,
             deleted: false
         }).exec();
     }
@@ -28,16 +29,18 @@ export class TodosService {
         }).exec();
     }
 
-    async setDone(id: TodoItemIdDto): Promise<Todos> {
+    async setDone(id: TodoItemIdDto, userId: string): Promise<Todos> {
         await this.todoModel.updateOne({
-            _id: id.id
+            _id: id.id,
+            userId
         }, { done: true });
         return await this.findOne(id);
     }
 
-    async delete(id: TodoItemIdDto): Promise<boolean> {
+    async delete(id: TodoItemIdDto, userId: string): Promise<boolean> {
         await this.todoModel.updateOne({
-            _id: id.id
+            _id: id.id,
+            userId
         }, { deleted: true });
         return true;
     }

@@ -28,7 +28,6 @@ class AuthService {
                 body: JSON.stringify({ name, password }),
             }, 0);
             const data = await response.json();
-            console.log(data);
             if (data.access_token) {
                 localStorage.setItem('token', data.access_token);
                 localStorage.setItem('refreshToken', data.refresh_token);
@@ -65,7 +64,6 @@ class AuthService {
                 },
             }, 0);
             const data = await response.json();
-            console.log(data);
             if (data.access_token) {
                 localStorage.setItem('token', data.access_token);
                 localStorage.setItem('refreshToken', data.refresh_token);

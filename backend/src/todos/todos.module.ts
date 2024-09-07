@@ -5,9 +5,13 @@ import * as AutoIncrementFactory from 'mongoose-sequence';
 import { TodosController } from './todos.controller';
 import { TodosService } from './todos.service';
 import { Todos, TodosSchema } from './schemas/todos.schema';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
   imports: [
+    UsersModule,
     MongooseModule.forFeature([{
       name: Todos.name,
       schema: TodosSchema,
