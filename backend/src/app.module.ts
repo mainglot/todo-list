@@ -11,7 +11,7 @@ import { join } from 'path';
 @Module({
   imports: [
     AuthModule,
-    MongooseModule.forRoot(process.env.MONGODB_PATH, {}),
+    MongooseModule.forRoot(process.env.MONGODB_PATH || 'mongodb://localhost:27017', {}),
     UsersModule,
     TodosModule,
     ServeStaticModule.forRoot({
@@ -19,6 +19,6 @@ import { join } from 'path';
     }),
   ],
   controllers: [],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}

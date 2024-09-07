@@ -26,6 +26,7 @@ export class AuthService {
     async getTokens(user: User): Promise<{access_token: string, refresh_token: string}> {
         const payload = {
             name: user.name,
+            sub: user._id.toString(),
         };
 
         const access_token = await this.jwtService.signAsync(payload);

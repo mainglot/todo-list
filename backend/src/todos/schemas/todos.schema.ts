@@ -10,6 +10,9 @@ export class Todos {
     _id: ObjectId;
 
     @Prop()
+    userId: string;
+
+    @Prop()
     description: string;
 
     @Prop({

@@ -4,4 +4,6 @@ export class CreateDto {
 
     @ApiProperty()
     description: string;
+
+    userId: string;
 }
