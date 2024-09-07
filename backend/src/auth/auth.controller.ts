@@ -1,6 +1,7 @@
 import {
     Body,
     Controller,
+    Delete,
     Get,
     HttpCode,
     HttpStatus,
@@ -27,9 +28,9 @@ export class AuthController {
     @ApiBearerAuth()
     @UseGuards(AuthGuard)
     @HttpCode(HttpStatus.OK)
-    @Post('logout')
+    @Delete('login')
     signOut(@Request() req) {
-        return this.authService.signOut(req.name);
+        return this.authService.signOut(req.user.name);
     }
 
     @ApiBearerAuth()

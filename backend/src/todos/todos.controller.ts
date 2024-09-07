@@ -24,13 +24,13 @@ export class TodosController {
 
     @ApiParam({ name: 'id', required: true })
     @Patch(':id')
-    async setDone(@Param() req: TodoItemIdDto): Promise<Todos> {
-        return this.todosService.setDone(req);
+    async setDone(@Param() param: TodoItemIdDto): Promise<Todos> {
+        return this.todosService.setDone(param);
     }
 
     @ApiParam({ name: 'id', required: true })
     @Delete(':id')
-    async delete(@Request() todoItemId: TodoItemIdDto): Promise<boolean> {
+    async delete(@Param() todoItemId: TodoItemIdDto): Promise<boolean> {
         return this.todosService.delete(todoItemId);
     }
 }

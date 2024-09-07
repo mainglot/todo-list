@@ -12,7 +12,9 @@ export class TodosService {
     ) {}
 
     async getList(): Promise<Todos[]> {
-        return this.todoModel.find().exec();
+        return this.todoModel.find({
+            deleted: false
+        }).exec();
     }
 
     async create(createDto: CreateDto): Promise<Todos> {
